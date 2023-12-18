@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import StoreProvider from "@/providers/storeProvider";
 
 export const metadata: Metadata = {
   title: "Google Books",
@@ -16,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }

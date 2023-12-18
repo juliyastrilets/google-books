@@ -1,16 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "@/store/hook";
+import { fetchBooks } from "@/store/slices/booksSlice";
 
 export const InputSearch = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [inputValue, setInputValue] = useState("");
+  const dispatch = useAppDispatch();
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
     setInputValue(event.currentTarget.value);
   };
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
+    dispatch(fetchBooks(inputValue));
   };
 
   useEffect(() => {
