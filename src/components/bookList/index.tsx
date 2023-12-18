@@ -5,19 +5,23 @@ import { useAppSelector } from "@/store/hook";
 
 export const BookList = () => {
   const books = useAppSelector((state) => state.books.list);
-  const isLoadingBooks = useAppSelector((state) => state.books.isLoading);
-  const fetchBooksError = useAppSelector((state) => state.books.error);
+  // const isLoadingBooks = useAppSelector((state) => state.books.isLoading);
+  // const fetchBooksError = useAppSelector((state) => state.books.error);
+
+  const computedCardImage = (imgSrc: string): string => {
+    return imgSrc ? imgSrc : "image-not-found.jpg";
+  };
 
   return (
     <>
-      {isLoadingBooks && <h2>Загрузка</h2>}
-      {fetchBooksError && <h2>{fetchBooksError}</h2>}
+      {/* {isLoadingBooks && <h2>Загрузка</h2>}
+      {fetchBooksError && <h2>{fetchBooksError}</h2>} */}
       <ul className={styles.list}>
         {books.map((book) => (
           <li className={styles.item} key={book.id}>
             <img
               className={styles.image}
-              src={book.imageSrc}
+              src={computedCardImage(book.imageSrc)}
               alt="book thumbnail"
             />
             <div className={styles.data}>
