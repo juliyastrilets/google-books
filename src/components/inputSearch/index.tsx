@@ -25,7 +25,7 @@ export const InputSearch = () => {
     <form onSubmit={handleSubmit} className={styles.form}>
       <input
         className={styles.input}
-        type="text"
+        type="search"
         value={inputValue}
         onChange={handleInputChange}
       />
