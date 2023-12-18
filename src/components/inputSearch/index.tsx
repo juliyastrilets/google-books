@@ -1,5 +1,5 @@
 "use client";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/store/hook";
 import { fetchBooks } from "@/store/slices/booksSlice";
