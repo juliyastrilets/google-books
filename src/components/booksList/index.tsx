@@ -6,7 +6,7 @@ import { BookListItem } from "./bookListItem";
 import { Button } from "@/shared/button";
 import { Loader } from "@/shared/loader";
 
-export const BookList = () => {
+export const BooksList = () => {
   const books = useAppSelector((state) => state.books.list);
   const isLoadingBooks = useAppSelector((state) => state.books.isLoading);
   const fetchBooksMessage = useAppSelector((state) => state.books.message);

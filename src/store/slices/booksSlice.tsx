@@ -8,6 +8,15 @@ export type Book = {
   categories: string[];
 };
 
+export type BooksOrder = "relevance" | "newest";
+export type BooksFilter =
+  | "all"
+  | "partial"
+  | "full"
+  | "free-ebooks"
+  | "paid-ebooks"
+  | "ebooks";
+
 interface BooksState {
   list: Book[];
   totalItems: number;
@@ -15,7 +24,10 @@ interface BooksState {
   isCanGetMore: boolean;
   isLoading: boolean;
   searchString: string;
+  orderBy: BooksOrder;
+  filter: BooksFilter;
 }
+
 const initialState: BooksState = {
   list: [],
   totalItems: 0,
@@ -23,6 +35,8 @@ const initialState: BooksState = {
   isCanGetMore: false,
   isLoading: false,
   searchString: "",
+  orderBy: "relevance",
+  filter: "all",
 };
 
 const getBooksDataByResponse = (items: any) => {
@@ -40,10 +54,17 @@ const fetchBooksFromGoogleApi = async (
   refresh: boolean
 ) => {
   const apiUrl = "https://www.googleapis.com/books/v1/volumes";
-  const key = "AIzaSyAoB54OXtNnm5h-oZyus7Un1ipP7CXBsn4";
-  const startIndex = refresh ? 0 : booksState.list.length;
-  const maxResults = 30;
-  const queryUrl = `${apiUrl}?q=${booksState.searchString.toLocaleLowerCase()}&startIndex=${startIndex}&maxResults=${maxResults}&key=${key}`;
+  const searchString = `q=${booksState.searchString.toLocaleLowerCase()}`;
+  const orderByString = `&orderBy=${booksState.orderBy}`;
+  const startIndexString = `&startIndex=${
+    refresh ? 0 : booksState.list.length
+  }`;
+  const maxResultsString = "&maxResults=30";
+  const filterString =
+    booksState.filter === "all" ? "" : `&filter=${booksState.filter}`;
+  const keyString = "&key=AIzaSyAoB54OXtNnm5h-oZyus7Un1ipP7CXBsn4";
+
+  const queryUrl = `${apiUrl}?${searchString}${orderByString}${filterString}${startIndexString}${maxResultsString}${keyString}`;
   const response = await fetch(queryUrl, {
     method: "GET",
   });
@@ -75,6 +96,12 @@ const booksSlice = createSlice({
   reducers: {
     setSearchString(state, action) {
       state.searchString = action.payload;
+    },
+    setOrderBy(state, action) {
+      state.orderBy = action.payload;
+    },
+    setFilter(state, action) {
+      state.filter = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -123,5 +150,5 @@ const booksSlice = createSlice({
   },
 });
 
-export const { setSearchString } = booksSlice.actions;
+export const { setSearchString, setOrderBy, setFilter } = booksSlice.actions;
 export default booksSlice.reducer;

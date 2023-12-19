@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import { InputSearch } from "@/components/inputSearch";
-import { BookList } from "@/components/bookList";
+import { BooksList } from "@/components/booksList";
 
 export default function MainPage() {
   return (
@@ -9,7 +9,7 @@ export default function MainPage() {
         <InputSearch />
       </section>
       <section className={styles.books}>
-        <BookList />
+        <BooksList />
       </section>
     </div>
   );
