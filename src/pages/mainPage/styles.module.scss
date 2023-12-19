@@ -3,10 +3,23 @@
   width: 100%;
   padding: 12px;
   margin: 0 auto;
+
+  @media (min-width: 768px) {
+    padding: 48px 12px;
+  }
 }
 
 .search {
   margin-bottom: 24px;
 }
 
-// .books {}
+.books {
+  &:not(:last-child) {
+    margin-bottom: 32px;
+  }
+}
+
+.moreButton {
+  display: flex;
+  justify-content: center;
+}

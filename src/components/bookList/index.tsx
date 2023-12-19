@@ -2,34 +2,20 @@
 "use client";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@/store/hook";
+import { BookListItem } from "./bookListItem";
 
 export const BookList = () => {
   const books = useAppSelector((state) => state.books.list);
-  // const isLoadingBooks = useAppSelector((state) => state.books.isLoading);
-  // const fetchBooksError = useAppSelector((state) => state.books.error);
-
-  const computedCardImage = (imgSrc: string): string => {
-    return imgSrc ? imgSrc : "image-not-found.jpg";
-  };
+  const isLoadingBooks = useAppSelector((state) => state.books.isLoading);
+  const fetchBooksMessage = useAppSelector((state) => state.books.message);
 
   return (
     <>
-      {/* {isLoadingBooks && <h2>Загрузка</h2>}
-      {fetchBooksError && <h2>{fetchBooksError}</h2>} */}
+      {isLoadingBooks && <h2>Загрузка</h2>}
+      {fetchBooksMessage && <h2>{fetchBooksMessage}</h2>}
       <ul className={styles.list}>
-        {books.map((book) => (
-          <li className={styles.item} key={book.id}>
-            <img
-              className={styles.image}
-              src={computedCardImage(book.imageSrc)}
-              alt="book thumbnail"
-            />
-            <div className={styles.data}>
-              <h3 className={styles.title} title={book.title}>
-                {book.title}
-              </h3>
-            </div>
-          </li>
+        {books.map((book, idx) => (
+          <BookListItem key={idx} book={book} />
         ))}
       </ul>
     </>
