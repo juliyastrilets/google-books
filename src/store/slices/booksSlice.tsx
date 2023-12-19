@@ -18,23 +18,23 @@ export type BooksFilter =
   | "ebooks";
 
 interface BooksState {
+  searchString: string;
+  message: string;
   list: Book[];
   totalItems: number;
-  message: string;
   isCanGetMore: boolean;
   isLoading: boolean;
-  searchString: string;
   orderBy: BooksOrder;
   filter: BooksFilter;
 }
 
 const initialState: BooksState = {
+  searchString: "",
+  message: "",
   list: [],
   totalItems: 0,
-  message: "",
   isCanGetMore: false,
   isLoading: false,
-  searchString: "",
   orderBy: "relevance",
   filter: "all",
 };
