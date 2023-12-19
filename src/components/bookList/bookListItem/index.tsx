@@ -24,8 +24,8 @@ export const BookListItem = ({ book }: BookListItemProps) => {
         <h3 className={styles.title} title={book.title}>
           {book.title}
         </h3>
-        <p>{computedAuthorsString}</p>
-        <p>{computedCategory}</p>
+        <p className={styles.authors}>Authors: {computedAuthorsString}</p>
+        <p className={styles.category}>Category: {computedCategory}</p>
       </div>
     </li>
   );

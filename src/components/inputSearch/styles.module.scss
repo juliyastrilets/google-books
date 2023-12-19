@@ -3,4 +3,12 @@
   gap: 4px;
   width: 100%;
   font-size: 14px;
+
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}
+
+.caption {
+  font-size: 14px;
 }

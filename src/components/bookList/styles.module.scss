@@ -9,4 +9,23 @@
   @media (min-width: 1200px) {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  &:not(:last-child) {
+    margin-bottom: 32px;
+  }
+}
+
+.message {
+  text-align: center;
+}
+
+.moreButton {
+  display: flex;
+  justify-content: center;
+}
+
+.loader {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
 }

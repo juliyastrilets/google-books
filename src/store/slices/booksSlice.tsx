@@ -96,12 +96,17 @@ const booksSlice = createSlice({
           state.message = "По вашему запросу ничего не найдено";
         }
         state.totalItems = action.payload.totalItems;
+        console.log(typeof state.totalItems);
         if (state.list.length < state.totalItems) {
           state.isCanGetMore = true;
         } else {
           state.isCanGetMore = false;
         }
         state.isLoading = false;
+      })
+      .addCase(fetchBooksMore.pending, (state) => {
+        state.message = "";
+        state.isLoading = true;
       })
       .addCase(
         fetchBooksMore.fulfilled,

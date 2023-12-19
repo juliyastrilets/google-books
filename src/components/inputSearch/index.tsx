@@ -36,7 +36,9 @@ export const InputSearch = () => {
           Search
         </Button>
       </form>
-      <p>Books found: {totalSearchItems}</p>
+      {Boolean(totalSearchItems) && (
+        <p className={styles.caption}>Books found: {totalSearchItems}</p>
+      )}
     </>
   );
 };
