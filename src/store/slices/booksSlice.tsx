@@ -65,10 +65,12 @@ const fetchBooksFromGoogleApi = async (
   const keyString = "&key=AIzaSyAoB54OXtNnm5h-oZyus7Un1ipP7CXBsn4";
 
   const queryUrl = `${apiUrl}?${searchString}${orderByString}${filterString}${startIndexString}${maxResultsString}${keyString}`;
+
   const response = await fetch(queryUrl, {
     method: "GET",
   });
   const data = await response.json();
+
   return data;
 };
 
@@ -130,6 +132,10 @@ const booksSlice = createSlice({
           state.isCanGetMore = false;
         }
         state.isLoading = false;
+      })
+      .addCase(fetchBooksMore.rejected, (state) => {
+        state.isLoading = false;
+        state.message = "Ошибка запроса на сервер";
       })
       .addCase(fetchBooksMore.pending, (state) => {
         state.message = "";
